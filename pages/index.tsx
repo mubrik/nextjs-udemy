@@ -43,43 +43,30 @@ const Home: NextPage = () => {
         variant={"outlined"}
         component={NextLinkComposed}
         to={{
-          pathname: '/portfolio',
+          pathname: '/events',
           query: { name: 'test' },
         }}
       >
-        portfolio
+        events
+      </Button><Button
+        variant={"outlined"}
+        component={NextLinkComposed}
+        to={{
+          pathname: '/events/7747',
+          query: { name: 'test' },
+        }}
+      >
+        events id
       </Button>
       <Button
         variant={"outlined"}
         component={NextLinkComposed}
         to={{
-          pathname: '/portfolio/54683',
+          pathname: '/events/7373/3838',
           query: { name: 'test' },
         }}
       >
-        portfolio with id
-      </Button>
-      <Button
-        variant={"outlined"}
-        component={NextLinkComposed}
-        to={{
-          pathname: '/clients/333/444',
-          query: { name: 'test' },
-        }}
-      >
-        client double id
-      </Button>
-      <Button
-        variant={"contained"}
-        onClick={() => handleRandom("push")}
-      >
-        using router push to route
-      </Button>
-      <Button
-        variant={"contained"}
-        onClick={() => handleRandom("replace")}
-      >
-        using router replace to route
+        events slug
       </Button>
     </div>
   );
