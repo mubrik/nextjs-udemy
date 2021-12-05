@@ -1,78 +1,37 @@
 import type { NextPage, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
 // material
-import Button from '@mui/material/Button';
-import { NextLinkComposed } from '../utils/NextLink';
+import { Stack } from '@mui/material';
+// server
+import { getAllEventsArray } from '../server/server-utils';
+import { IEvent } from '../types/dataTypes';
+// custom
+import EventList from "../components/events/EventList"; 
 
-const Home: NextPage = () => {
+// prop type
+interface IAppProps {
+  events: IEvent[];
+}
 
-  const {push, replace} = useRouter();
-
-  // handler
-  const handleRandom = (param: string): void => {
-
-    switch (param) {
-      case "push":
-        // push route, can go back
-        push({
-          pathname: "/portfolio",
-          query: {name: "i cam from home"}
-        });
-        break;
-      
-      case "replace":
-        // replace route can go back
-        replace({
-          pathname: "/portfolio",
-          query: {name: "i cam from home"}
-        });
-        break;
-      
-      default:
-        break;
-    }
-  };
+const Home: NextPage<IAppProps> = ({events}) => {
 
   return (
-    <div>
-     <div> Hello World </div>
-     <Button
-        variant={"outlined"}
-        component={NextLinkComposed}
-        to={{
-          pathname: '/events',
-          query: { name: 'test' },
-        }}
-      >
-        events
-      </Button><Button
-        variant={"outlined"}
-        component={NextLinkComposed}
-        to={{
-          pathname: '/events/7747',
-          query: { name: 'test' },
-        }}
-      >
-        events id
-      </Button>
-      <Button
-        variant={"outlined"}
-        component={NextLinkComposed}
-        to={{
-          pathname: '/events/7373/3838',
-          query: { name: 'test' },
-        }}
-      >
-        events slug
-      </Button>
-    </div>
+    <Stack spacing={2} justifyContent={"center"}>
+      <div> Hello World </div>
+      <EventList eventData={events}/>
+    </Stack>
   );
 };
 
-export const getStaticProps: GetStaticProps = () => {
+export const getStaticProps: GetStaticProps = async () => {
+  // get data
+  const _events = await getAllEventsArray();
+  // filter
+  const _featuredEvents = _events.filter(event => event.isFeatured);
 
   return {
-    props: {}
+    props: {
+      events: _featuredEvents
+    }
   };
 };
 

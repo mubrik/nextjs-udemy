@@ -1,4 +1,7 @@
-import {IEvent} from "../../dummyData";
+// material
+import { Stack } from "@mui/material";
+// type
+import { IEvent } from "../../types/dataTypes";
 // event
 import {EventItem} from "./EventItem";
 
@@ -9,10 +12,10 @@ interface IEventListProps {
 const EventList = ({eventData}: IEventListProps) : JSX.Element => {
 
   return(
-    <>
-    {eventData.map((event) => <EventItem key={event.id} eventData={event}/> )}
-    </>
+    <Stack spacing={2} alignItems={"center"}>
+      {eventData.map((event) => <EventItem key={event.id} eventData={event}/> )}
+    </Stack>
   );
 };
 
-export {EventList};
+export default EventList;

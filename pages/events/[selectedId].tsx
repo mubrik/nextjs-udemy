@@ -1,15 +1,23 @@
+// next
 import { useRouter } from "next/router";
-// data
-import { getEventById } from "../../dummyData";
+import type { GetServerSideProps, NextPage } from "next";
 // material
 import { Stack, Typography} from "@mui/material";
+// server
+import { getEventById } from "../../server/server-utils";
+// types
+import { IEvent } from "../../types/dataTypes";
+// app props type
+interface IAppProps {
+  event: IEvent;
+}
 
-const EventSinglePage = (): JSX.Element => {
+const EventSinglePage: NextPage<IAppProps> = ({event}) => {
 
   // router
-  const {query} = useRouter();
-  // get event
-  const event = getEventById(query["selectedId"] as string);
+  // const {query} = useRouter();
+  // // get event
+  // const event = getEventById(query["selectedId"] as string);
 
   return (
     <>
@@ -25,6 +33,19 @@ const EventSinglePage = (): JSX.Element => {
     }
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({query}) => {
+
+  // get item|null
+  const _event = await getEventById(query["selectedId"] as string);
+
+  return {
+    props: {
+      event: _event
+    }
+  };
+
 };
 
 export default EventSinglePage;

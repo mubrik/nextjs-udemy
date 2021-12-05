@@ -1,4 +1,5 @@
-import {IEvent} from "../../dummyData";
+// type
+import { IEvent } from "../../types/dataTypes";
 // material
 import { Button } from "@mui/material";
 import Card from '@mui/material/Card';
@@ -16,7 +17,7 @@ interface IEventItemProps {
 const EventItem = ({eventData}: IEventItemProps) : JSX.Element => {
 
   return(
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345, minWidth: "280px" }}>
       <CardContent>
         <Typography variant="body2" >
           {eventData.title}
