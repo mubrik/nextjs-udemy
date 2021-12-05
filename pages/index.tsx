@@ -1,10 +1,8 @@
-import type { NextPage } from 'next';
+import type { NextPage, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 // material
 import Button from '@mui/material/Button';
 import { NextLinkComposed } from '../utils/NextLink';
-
-
 
 const Home: NextPage = () => {
 
@@ -34,7 +32,6 @@ const Home: NextPage = () => {
         break;
     }
   };
-
 
   return (
     <div>
@@ -70,6 +67,13 @@ const Home: NextPage = () => {
       </Button>
     </div>
   );
+};
+
+export const getStaticProps: GetStaticProps = () => {
+
+  return {
+    props: {}
+  };
 };
 
 export default Home;
