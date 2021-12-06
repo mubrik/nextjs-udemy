@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async ({query}) => {
 
   return {
     props: {
-      event: _event
+      event: _event,
     }
   };
 

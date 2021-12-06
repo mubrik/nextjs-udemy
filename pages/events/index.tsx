@@ -1,17 +1,39 @@
-import { getAllEvents } from "../../dummyData";
-// list
-import { EventList } from "../../components/events/EventList";
+import type { NextPage, GetStaticProps } from 'next';
+// material
+import { Stack } from '@mui/material';
+// server
+import { getAllEventsArray } from '../../server/server-utils';
+import { IEvent } from '../../types/dataTypes';
+// custom
+import EventList from "../../components/events/EventList";
 
-const EventsHomePage = (): JSX.Element => {
+// prop type
+interface IAppProps {
+  events: IEvent[];
+}
 
-  // data
-  const events = getAllEvents();
+const EventsHomePage: NextPage<IAppProps> = ({events}) => {
 
   return (
-    <div>
+    <Stack spacing={2} alignItems={"center"}>
+      <div> Featured Events </div>
       <EventList eventData={events}/>
-    </div>
+    </Stack>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  // get data
+  const _events = await getAllEventsArray();
+
+  // filter
+  const _featuredEvents = _events.filter(event => event.isFeatured);
+
+  return {
+    props: {
+      events: _featuredEvents
+    }
+  };
 };
 
 export default EventsHomePage;

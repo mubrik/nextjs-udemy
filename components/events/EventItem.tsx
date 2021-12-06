@@ -17,7 +17,7 @@ interface IEventItemProps {
 const EventItem = ({eventData}: IEventItemProps) : JSX.Element => {
 
   return(
-    <Card sx={{ maxWidth: 345, minWidth: "280px" }}>
+    <Card sx={{ minWidth: "280px" }} elevation={3}>
       <CardContent>
         <Typography variant="body2" >
           {eventData.title}
